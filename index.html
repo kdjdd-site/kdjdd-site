@@ -4,74 +4,140 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Urban Development</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url('urban.jpg') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: rgba(76, 175, 80, 0.9);
+      color: white;
+      padding: 1em;
+      text-align: center;
+    }
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      background-color: rgba(51, 51, 51, 0.9);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+    }
+    nav ul li {
+      margin: 0;
+    }
+    nav ul li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+    nav ul li a:hover {
+      background-color: #111;
+    }
+    section {
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.8);
+      margin: 10px;
+      border-radius: 10px;
+    }
+    .login {
+      margin-top: 1em;
+    }
+    .login input {
+      margin: 5px;
+      padding: 5px;
+    }
+    .team {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .team img {
+      width: 180px;
+      height: auto;
+      border-radius: 10px;
+    }
+    .team-member {
+      text-align: center;
+      flex: 0 1 calc(25% - 20px);
+    }
+    @media (max-width: 768px) {
+      .team {
+        flex-direction: column;
+        align-items: center;
+      }
+      .team-member {
+        flex: 0 1 auto;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- Navbar -->
   <header>
-    <nav class="navbar">
-      <div class="logo">Urban Development</div>
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#communities">Communities</a></li>
-        <li><a href="#contacts">Contacts</a></li>
-      </ul>
-    </nav>
+    <h1>Urban Development</h1>
   </header>
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#communities">Communities</a></li>
+      <li><a href="#contacts">Contacts</a></li>
+    </ul>
+  </nav>
 
-  <!-- Hero Section with Login -->
-  <section id="home" class="hero">
-    <div class="hero-content">
-      <h1>Urban Development</h1>
-      <p>Planning better cities for tomorrow.</p>
-
-      <!-- Login Form -->
-      <form action="folder4/save_user.php" method="POST" class="login-form">
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
+  <section id="home">
+    <h2>Urban Development</h2>
+    <p>Planning better cities for tomorrow.</p>
+    <div class="login">
+      <form method="POST" action="folder4/save_user.php">
+        <input type="text" name="username" placeholder="Username" required />
+        <input type="password" name="password" placeholder="Password" required />
         <button type="submit">Login</button>
       </form>
     </div>
   </section>
 
-  <!-- About Section -->
   <section id="about">
     <h2>About</h2>
     <p>This platform supports grievance redressal and urban development planning with citizen involvement.</p>
   </section>
 
-  <!-- Communities Section -->
   <section id="communities">
     <h2>Communities</h2>
     <p>Explore your local communities and engage with your city's development.</p>
   </section>
 
-  <!-- Contacts Section -->
   <section id="contacts">
     <h2>Our Team</h2>
-    <div class="team-gallery">
+    <div class="KDJDD">
       <div class="team-member">
-        <img src="Krish.jpg" alt="Team Member 1">
-        <p>Krish Dodiya</p>
-        <H2>Team Leader</H2>
+        <H3>Team Leader</H3>
+        <img src="Krish.jpg" alt="Krish Dodiya">
+        <p><strong>Krish Dodiya</strong></p>
       </div>
       <div class="team-member">
+         <p>Team Member 2</p>
         <img src="Dev.jpg" alt="Team Member 2">
-        <p>Team Member 2</p>
+             </div>
+      <div class="team-member">
+         <p>Team Member 3</p>
+        <img src="Jayraj.jpg" alt="Team Member 3">
       </div>
       <div class="team-member">
-        <img src="Dhanraj.jpg" alt="Team Member 3">
-        <p>Team Member 3</p>
-      </div>
-       <div class="team-member">
-        <img src="Darshan.jpg" alt="Team Member 3">
-        <p>Team Member 3</p>
-      </div>
-       <div class="team-member">
-        <img src="Jayraj.jpg" alt="Team Member 3">
-        <p>Team Member 3</p>
-      </div>
+         <p>Team Member 4</p>
+        <img src="Darshan.jpg" alt="Team Member 4">
+          </div>
+        <div class="team-member">
+           <p>Team Member 5</p>
+        <img src="Dhanraj.jpg" alt="Team Member 5">
+        </div>
     </div>
   </section>
 </body>

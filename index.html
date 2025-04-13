@@ -3,123 +3,76 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KDJDD URBAN-BOT</title>
-  <meta name="description" content="KDJDD URBAN-BOT Website - A responsive site with photos and descriptions, designed for all devices." />
-  <meta name="keywords" content="KDJDD,URBAN-BOT Website, Responsive Design, HTML, Photo Showcase" />
-  <meta name="author" content="Krish Dodiya" />
-  <meta property="og:title" content="KDJDD URBAN-BOT Website" />
-  <meta property="og:description" content="Showcasing the KDJDD URBAN-BOT with photos, captions, and responsive design." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="1.jpg" />
-  <meta property="og:url" content="https://yourwebsite.com" />
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f0f2f5;
-      color: #333;
-    }
-    header {
-      background: linear-gradient(to right, #4a00e0, #8e2de2);
-      padding: 2rem;
-      text-align: center;
-      color: white;
-      font-size: 2.5rem;
-      font-weight: bold;
-      letter-spacing: 3px;
-    }
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 2rem;
-    }
-    .photo-section {
-      margin: 2rem 0;
-      text-align: center;
-    }
-    .photo-section img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-    .photo-text {
-      margin-top: 1rem;
-      font-size: 1.2rem;
-      color: #555;
-    }
-    footer {
-      margin-top: 3rem;
-      text-align: center;
-      padding: 1rem;
-      background: #ddd;
-      font-size: 0.9rem;
-      color: #555;
-    }
-    @media (max-width: 600px) {
-      header {
-        font-size: 2rem;
-      }
-      .container {
-        padding: 1rem;
-      }
-    }
-  </style>
+  <title>Urban Development</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>KDJDD URBAN-BOT</header>
-  <div style="
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-    margin-top: 2rem; ">
-    <figure style="text-align: center; width: 300px;">
-      <img src="Krish.jpg" alt="Urban Photo 1" style="width: 100%; border-radius: 1rem; box-shadow: 0 0 10px rgba(0,0,0,0.2);" />
-      <figcaption style="margin-top: 0.5rem; color: #555; font-style: italic;">
-        <div class="photo-text"><H2>
-       Website Creator and Bot Maker.
-      </H2> </div>
-      </figcaption>
-    </figure>
-    
-    <figure style="text-align: center; width: 300px;">
-      <img src="Dev.jpg" alt="Urban Photo 1" style="width: 100%; border-radius: 1rem; box-shadow: 0 0 10px rgba(0,0,0,0.2);" />
-      <figcaption style="margin-top: 0.5rem; color: #555; font-style: italic;">
-        <H2>Sercher and Writer</H2> 
-      </figcaption>
-    </figure>
-    
-    <figure style="text-align: center; width: 300px;">
-      <img src="Dhanraj.jpg" alt="Urban Photo 1" style="width: 100%; border-radius: 1rem; box-shadow: 0 0 10px rgba(0,0,0,0.2);" />
-      <figcaption style="margin-top: 0.5rem; color: #555; font-style: italic;">
-        <H2>Investor and Ideas</H2>
-      </figcaption>
-    </figure>
-    
-    <figure style="text-align: center; width: 300px;">
-      <img src="Darshan.jpg" alt="Urban Photo 2" style="width: 100%; border-radius: 1rem; box-shadow: 0 0 10px rgba(0,0,0,0.2);" />
-      <figcaption style="margin-top: 0.5rem; color: #555; font-style: italic;">
-          <H2>Investor and Ideas</H2>
-      </figcaption>
-    </figure>
-    
-     <figure style="text-align: center; width: 300px;">
-      <img src="jayraj.jpg" alt="Urban Photo 2" style="width: 100%; border-radius: 1rem; box-shadow: 0 0 10px rgba(0,0,0,0.2);" />
-      <figcaption style="margin-top: 0.5rem; color: #555; font-style: italic;">
-          <H2>Helper and Ideas</H2>
-      </figcaption>
-    </figure>
-    
-  <!-- Add more <figure> blocks here the same way -->
-  </div>
-</main>
-  <footer>
-    &copy; 2025 KDJDD Project. All rights reserved.
-  </footer>
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">Urban Development</div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#communities">Communities</a></li>
+        <li><a href="#contacts">Contacts</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section with Login -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>Urban Development</h1>
+      <p>Planning better cities for tomorrow.</p>
+
+      <!-- Login Form -->
+      <form action="folder4/save_user.php" method="POST" class="login-form">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2>About</h2>
+    <p>This platform supports grievance redressal and urban development planning with citizen involvement.</p>
+  </section>
+
+  <!-- Communities Section -->
+  <section id="communities">
+    <h2>Communities</h2>
+    <p>Explore your local communities and engage with your city's development.</p>
+  </section>
+
+  <!-- Contacts Section -->
+  <section id="contacts">
+    <h2>Our Team</h2>
+    <div class="team-gallery">
+      <div class="team-member">
+        <img src="Krish.jpg" alt="Team Member 1">
+        <p>Krish Dodiya</p>
+        <H2>Team Leader</H2>
+      </div>
+      <div class="team-member">
+        <img src="Dev.jpg" alt="Team Member 2">
+        <p>Team Member 2</p>
+      </div>
+      <div class="team-member">
+        <img src="Dhanraj.jpg" alt="Team Member 3">
+        <p>Team Member 3</p>
+      </div>
+       <div class="team-member">
+        <img src="Darshan.jpg" alt="Team Member 3">
+        <p>Team Member 3</p>
+      </div>
+       <div class="team-member">
+        <img src="Jayraj.jpg" alt="Team Member 3">
+        <p>Team Member 3</p>
+      </div>
+    </div>
+  </section>
 </body>
 </html>

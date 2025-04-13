@@ -78,6 +78,17 @@
       }
     }
   </style>
+  <script>
+    function showSection(id) {
+      const sections = document.querySelectorAll('section');
+      sections.forEach(sec => sec.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
+
+    window.onload = () => {
+      showSection('home');
+    };
+  </script>
 </head>
 <body>
   <header>
@@ -85,10 +96,10 @@
   </header>
   <nav>
     <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#communities">Communities</a></li>
-      <li><a href="#contacts">Contacts</a></li>
+      <li><a href="#" onclick="showSection('home')">Home</a></li>
+      <li><a href="#" onclick="showSection('about')">About</a></li>
+      <li><a href="#" onclick="showSection('communities')">Communities</a></li>
+      <li><a href="#" onclick="showSection('contacts')">Contacts</a></li>
     </ul>
   </nav>
 
@@ -104,40 +115,46 @@
     </div>
   </section>
 
-  <section id="about">
+  <section id="about" style="display:none">
     <h2>About</h2>
     <p>This platform supports grievance redressal and urban development planning with citizen involvement.</p>
   </section>
 
-  <section id="communities">
+  <section id="communities" style="display:none">
     <h2>Communities</h2>
     <p>Explore your local communities and engage with your city's development.</p>
   </section>
 
-  <section id="contacts">
+  <section id="contacts" style="display:none">
     <h2>Our Team</h2>
     <div class="KDJDD">
-      <div class="team-member">
-        <H3>Team Leader</H3>
-        <img src="Krish.jpg" alt="Krish Dodiya">
-        <p><strong>Krish Dodiya</strong></p>
-      </div>
-      <div class="team-member">
-         <p>Team Member 2</p>
-        <img src="Dev.jpg" alt="Team Member 2">
-             </div>
-      <div class="team-member">
-         <p>Team Member 3</p>
-        <img src="Jayraj.jpg" alt="Team Member 3">
-      </div>
-      <div class="team-member">
-         <p>Team Member 4</p>
-        <img src="Darshan.jpg" alt="Team Member 4">
-          </div>
+      <div class="team">
         <div class="team-member">
-           <p>Team Member 5</p>
-        <img src="Dhanraj.jpg" alt="Team Member 5">
+          <h3>Team Leader</h3>
+          <img src="Krish.jpg" alt="Krish Dodiya">
+          <p><strong>Krish Dodiya</strong></p>
         </div>
+        <div class="team-member">
+          <p>Team Member 2</p>
+          <img src="Dev.jpg" alt="Team Member 2">
+           <p><strong>Dev Kalariya</strong></p>
+        </div>
+        <div class="team-member">
+          <p>Team Member 3</p>
+          <img src="Jayraj.jpg" alt="Team Member 3">
+           <p><strong>Jayraj Kamaliya</strong></p>
+        </div>
+        <div class="team-member">
+          <p>Team Member 4</p>
+          <img src="Darshan.jpg" alt="Team Member 4">
+           <p><strong>Darshan Kathad</strong></p>
+        </div>
+        <div class="team-member">
+          <p>Team Member 5</p>
+          <img src="Dhanraj.jpg" alt="Team Member 5">
+           <p><strong>Dhanraj</strong></p>
+        </div>
+      </div>
     </div>
   </section>
 </body>

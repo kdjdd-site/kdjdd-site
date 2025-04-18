@@ -5,31 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Urban Development</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: url('urban.jpg') no-repeat center center fixed;
-      background-size: cover;
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
+    body {
+      font-family: Arial, sans-serif;
+      transition: background-image 0.5s ease-in-out;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
     header {
       background-color: rgba(76, 175, 80, 0.9);
       color: white;
       padding: 1em;
       text-align: center;
     }
+
     nav ul {
       list-style-type: none;
-      margin: 0;
-      padding: 0;
       background-color: rgba(51, 51, 51, 0.9);
-      overflow: hidden;
       display: flex;
       justify-content: center;
     }
-    nav ul li {
-      margin: 0;
-    }
+
     nav ul li a {
       display: block;
       color: white;
@@ -37,45 +39,79 @@
       padding: 14px 16px;
       text-decoration: none;
     }
+
     nav ul li a:hover {
       background-color: #111;
     }
+
     section {
       padding: 20px;
-      background-color: rgba(255, 255, 255, 0.8);
       margin: 10px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.2);
+      animation: fadeIn 0.7s ease-in-out;
+    }
+
+    .login form {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 2em;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .login input,
+    .login button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
       border-radius: 10px;
+      border: none;
+      font-size: 1rem;
     }
-    .login {
-      margin-top: 1em;
+
+    .login button {
+      background-color: #4caf50;
+      color: white;
+      cursor: pointer;
     }
-    .login input {
-      margin: 5px;
-      padding: 5px;
+
+    .login button:hover {
+      background-color: #388e3c;
     }
+
     .team {
       display: flex;
       justify-content: space-around;
       flex-wrap: wrap;
       gap: 20px;
     }
+
     .team img {
       width: 180px;
-      height: auto;
       border-radius: 10px;
     }
+
     .team-member {
       text-align: center;
       flex: 0 1 calc(25% - 20px);
     }
+
     @media (max-width: 768px) {
       .team {
         flex-direction: column;
         align-items: center;
       }
-      .team-member {
-        flex: 0 1 auto;
-      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
   <script>
@@ -83,6 +119,26 @@
       const sections = document.querySelectorAll('section');
       sections.forEach(sec => sec.style.display = 'none');
       document.getElementById(id).style.display = 'block';
+
+      // Change background image based on section
+      let bg;
+      switch(id) {
+        case 'home':
+          bg = 'url("login-bg.jpg")';
+          break;
+        case 'about':
+          bg = 'url("about-bg.jpg")';
+          break;
+        case 'communities':
+          bg = 'url("communities-bg.jpg")';
+          break;
+        case 'contacts':
+          bg = 'url("contacts-bg.jpg")';
+          break;
+        default:
+          bg = 'url("urban.jpg")';
+      }
+      document.body.style.backgroundImage = bg;
     }
 
     window.onload = () => {
@@ -96,7 +152,7 @@
   </header>
   <nav>
     <ul>
-      <li><a href="#" onclick="showSection('home')">Home</a></li>
+      <li><a href="#" onclick="showSection('home')">Login</a></li>
       <li><a href="#" onclick="showSection('about')">About</a></li>
       <li><a href="#" onclick="showSection('communities')">Communities</a></li>
       <li><a href="#" onclick="showSection('contacts')">Contacts</a></li>
@@ -104,20 +160,19 @@
   </nav>
 
   <section id="home">
-    <h2>Urban Development</h2>
-    <p>Planning better cities for tomorrow.</p>
+    <h2>Login</h2>
     <div class="login">
       <form method="POST" action="folder4/save_user.php">
         <input type="text" name="username" placeholder="Username" required />
         <input type="password" name="password" placeholder="Password" required />
         <button type="submit">Login</button>
       </form>
-    <iframe
-    src="https://cdn.botpress.cloud/webchat/v2.3/shareable.html?configUrl=https://files.bpcontent.cloud/2025/03/31/08/20250331083834-34NDXF4R.json"
-    width="100%"
-    height="600px"
-    style="border:none;"
-    ></iframe>
+      <iframe
+        src="https://cdn.botpress.cloud/webchat/v2.3/shareable.html?configUrl=https://files.bpcontent.cloud/2025/03/31/08/20250331083834-34NDXF4R.json"
+        width="100%"
+        height="600px"
+        style="border:none;"
+      ></iframe>
     </div>
   </section>
 
@@ -133,33 +188,31 @@
 
   <section id="contacts" style="display:none">
     <h2>Our Team</h2>
-    <div class="KDJDD">
-      <div class="team">
-        <div class="team-member">
-          <h3>Team Leader</h3>
-          <img src="Krish.jpg" alt="Krish Dodiya">
-          <p><strong>Krish Dodiya</strong></p>
-        </div>
-        <div class="team-member">
-          <p>Team Member 2</p>
-          <img src="Dev.jpg" alt="Team Member 2">
-           <p><strong>Dev Kalariya</strong></p>
-        </div>
-        <div class="team-member">
-          <p>Team Member 3</p>
-          <img src="Jayraj.jpg" alt="Team Member 3">
-           <p><strong>Jayraj Kamaliya</strong></p>
-        </div>
-        <div class="team-member">
-          <p>Team Member 4</p>
-          <img src="Darshan.jpg" alt="Team Member 4">
-           <p><strong>Darshan Kathad</strong></p>
-        </div>
-        <div class="team-member">
-          <p>Team Member 5</p>
-          <img src="Dhanraj.jpg" alt="Team Member 5">
-           <p><strong>Dhanraj</strong></p>
-        </div>
+    <div class="team">
+      <div class="team-member">
+        <h3>Team Leader</h3>
+        <img src="Krish.jpg" alt="Krish Dodiya">
+        <p><strong>Krish Dodiya</strong></p>
+      </div>
+      <div class="team-member">
+        <p>Team Member 2</p>
+        <img src="Dev.jpg" alt="Team Member 2">
+        <p><strong>Dev Kalariya</strong></p>
+      </div>
+      <div class="team-member">
+        <p>Team Member 3</p>
+        <img src="Jayraj.jpg" alt="Team Member 3">
+        <p><strong>Jayraj Kamaliya</strong></p>
+      </div>
+      <div class="team-member">
+        <p>Team Member 4</p>
+        <img src="Darshan.jpg" alt="Team Member 4">
+        <p><strong>Darshan Kathad</strong></p>
+      </div>
+      <div class="team-member">
+        <p>Team Member 5</p>
+        <img src="Dhanraj.jpg" alt="Team Member 5">
+        <p><strong>Dhanraj</strong></p>
       </div>
     </div>
   </section>

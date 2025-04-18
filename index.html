@@ -2,20 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Urban Development</title>
   <style>
-    * {
+    html, body {
+      height: 100%;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
+
     body {
       font-family: Arial, sans-serif;
-      transition: background-image 0.5s ease-in-out;
+      background: url('bg-login.jpg') no-repeat center center fixed;
       background-size: cover;
       background-position: center;
-      background-repeat: no-repeat;
+      transition: background-image 0.6s ease-in-out;
     }
 
     header {
@@ -27,15 +28,20 @@
 
     nav ul {
       list-style-type: none;
+      margin: 0;
+      padding: 0;
       background-color: rgba(51, 51, 51, 0.9);
       display: flex;
       justify-content: center;
     }
 
+    nav ul li {
+      margin: 0;
+    }
+
     nav ul li a {
       display: block;
       color: white;
-      text-align: center;
       padding: 14px 16px;
       text-decoration: none;
     }
@@ -46,43 +52,45 @@
 
     section {
       padding: 20px;
+      background-color: rgba(255, 255, 255, 0.85);
       margin: 10px;
-      border-radius: 15px;
-      backdrop-filter: blur(10px);
-      background-color: rgba(255, 255, 255, 0.2);
-      animation: fadeIn 0.7s ease-in-out;
+      border-radius: 10px;
+      min-height: calc(100vh - 140px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .login form {
-      max-width: 400px;
-      margin: 50px auto;
-      padding: 2em;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.95);
+      padding: 20px;
       border-radius: 15px;
-      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      max-width: 350px;
+      margin: auto;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      text-align: center;
     }
 
-    .login input,
-    .login button {
-      width: 100%;
-      padding: 10px;
+    .login input {
+      width: 90%;
       margin: 10px 0;
-      border-radius: 10px;
-      border: none;
-      font-size: 1rem;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
     }
 
     .login button {
-      background-color: #4caf50;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      border: none;
       color: white;
+      border-radius: 8px;
       cursor: pointer;
-    }
-
-    .login button:hover {
-      background-color: #388e3c;
+      font-size: 16px;
     }
 
     .team {
@@ -94,6 +102,7 @@
 
     .team img {
       width: 180px;
+      height: auto;
       border-radius: 10px;
     }
 
@@ -107,38 +116,62 @@
         flex-direction: column;
         align-items: center;
       }
+      .team-member {
+        flex: 0 1 auto;
+      }
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* Chatbot Floating Button */
+    #chatbot-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 15px;
+      border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    #chatbot-frame {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 350px;
+      height: 500px;
+      border: none;
+      display: none;
+      z-index: 1000;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      animation: fadeIn 0.3s ease;
     }
   </style>
+
   <script>
     function showSection(id) {
       const sections = document.querySelectorAll('section');
       sections.forEach(sec => sec.style.display = 'none');
       document.getElementById(id).style.display = 'block';
 
-      // Change background image based on section
-      let bg;
+      let bg = '';
       switch(id) {
-        case 'home':
-          bg = 'url("H-1.jpg")';
-          break;
-        case 'about':
-          bg = 'url("About.jpg")';
-          break;
-        case 'communities':
-          bg = 'url("Communities.jpg")';
-          break;
-        case 'contacts':
-          bg = 'url("C-1.jpg")';
-          break;
-        default:
-          bg = 'url("urban.jpg")';
+        case 'home': bg = 'H-1.jpg'; break;
+        case 'about': bg = 'About.jpg'; break;
+        case 'communities': bg = 'communities.jpg'; break;
+        case 'contacts': bg = 'C-1.jpg'; break;
+        default: bg = 'bg-login.jpg';
       }
-      document.body.style.backgroundImage = bg;
+      document.body.style.backgroundImage = `url('${bg}')`;
+    }
+
+    function toggleChatbot() {
+      const frame = document.getElementById('chatbot-frame');
+      frame.style.display = frame.style.display === 'block' ? 'none' : 'block';
     }
 
     window.onload = () => {
@@ -146,10 +179,12 @@
     };
   </script>
 </head>
+
 <body>
   <header>
     <h1>Urban Development</h1>
   </header>
+
   <nav>
     <ul>
       <li><a href="#" onclick="showSection('home')">Login</a></li>
@@ -167,12 +202,6 @@
         <input type="password" name="password" placeholder="Password" required />
         <button type="submit">Login</button>
       </form>
-      <iframe
-        src="https://cdn.botpress.cloud/webchat/v2.3/shareable.html?configUrl=https://files.bpcontent.cloud/2025/03/31/08/20250331083834-34NDXF4R.json"
-        width="100%"
-        height="600px"
-        style="border:none;"
-      ></iframe>
     </div>
   </section>
 
@@ -196,25 +225,32 @@
       </div>
       <div class="team-member">
         <p>Team Member 2</p>
-        <img src="Dev.jpg" alt="Team Member 2">
+        <img src="Dev.jpg" alt="Dev Kalariya">
         <p><strong>Dev Kalariya</strong></p>
       </div>
       <div class="team-member">
         <p>Team Member 3</p>
-        <img src="Jayraj.jpg" alt="Team Member 3">
+        <img src="Jayraj.jpg" alt="Jayraj Kamaliya">
         <p><strong>Jayraj Kamaliya</strong></p>
       </div>
       <div class="team-member">
         <p>Team Member 4</p>
-        <img src="Darshan.jpg" alt="Team Member 4">
+        <img src="Darshan.jpg" alt="Darshan Kathad">
         <p><strong>Darshan Kathad</strong></p>
       </div>
       <div class="team-member">
         <p>Team Member 5</p>
-        <img src="Dhanraj.jpg" alt="Team Member 5">
+        <img src="Dhanraj.jpg" alt="Dhanraj">
         <p><strong>Dhanraj</strong></p>
       </div>
     </div>
   </section>
+
+  <!-- Floating Chatbot Button and Frame -->
+  <button id="chatbot-btn" onclick="toggleChatbot()">💬</button>
+  <iframe
+    id="chatbot-frame"
+    src="https://cdn.botpress.cloud/webchat/v2.3/shareable.html?configUrl=https://files.bpcontent.cloud/2025/03/31/08/20250331083834-34NDXF4R.json">
+  </iframe>
 </body>
 </html>

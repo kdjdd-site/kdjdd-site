@@ -231,9 +231,43 @@
           <img src="Krish.jpg" alt="Krish Dodiya">
           <p><strong>Krish Dodiya</strong></p>
         </div>
+        <div class="team-member">
+          <p>Team Member 2</p>
+          <img src="Dev.jpg" alt="Dev Kalariya">
+          <p><strong>Dev Kalariya</strong></p>
+        </div>
+        <div class="team-member">
+          <p>Team Member 3</p>
+          <img src="Jayraj.jpg" alt="Jayraj Kamaliya">
+          <p><strong>Jayraj Kamaliya</strong></p>
+        </div>
+        <div class="team-member">
+          <p>Team Member 4</p>
+          <img src="Darshan.jpg" alt="Darshan Kathad">
+          <p><strong>Darshan Kathad</strong></p>
+        </div>
+        <div class="team-member">
+          <p>Team Member 5</p>
+          <img src="Dhanraj.jpg" alt="Dhanraj">
+          <p><strong>Dhanraj</strong></p>
+        </div>
       </div>
     </section>
 
+    <!-- Feedback Button -->
+    <div style="text-align:center; margin-top: 30px;">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeqA1B8Q7EBrf_yc1evjxh2G2jbmNJLPr5hQkWhVfz5yyePgQ/viewform?usp=sharing" target="_blank">
+        <button style="padding: 12px 24px; font-size: 16px; background-color: #4CAF50; color: white; border: none; border-radius: 8px; cursor: pointer;">
+          Give Feedback
+        </button>
+      </a>
+    </div>
+
+    <!-- Floating Chatbot Button -->
+    <button id="chatbot-btn" onclick="toggleChatbot()">💬</button>
+    <iframe id="chatbot-frame"
+      src="https://cdn.botpress.cloud/webchat/v2.3/shareable.html?configUrl=https://files.bpcontent.cloud/2025/03/31/08/20250331083834-34NDXF4R.json">
+    </iframe>
   </div>
 
   <script>
@@ -267,6 +301,12 @@
         alert('Invalid credentials! Please try again.');
         return false;  // Prevent form submission
       }
+    }
+
+    // Toggle Chatbot visibility
+    function toggleChatbot() {
+      const chatbot = document.getElementById('chatbot-frame');
+      chatbot.style.display = chatbot.style.display === 'block' ? 'none' : 'block';
     }
   </script>
 </body>

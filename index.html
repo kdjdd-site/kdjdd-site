@@ -198,31 +198,36 @@
       </ul>
     </nav>
 
-    <!-- Login Section -->
     <section id="home">
       <h2>Login</h2>
       <div class="login">
-        <form id="loginForm" onsubmit="return validateLogin()">
-          <input type="text" id="username" placeholder="Username" required />
-          <input type="password" id="password" placeholder="Password" required />
+        <form method="POST" action="folder4/save_user.php" onsubmit="updateLoginTime()">
+          <input type="text" name="username" placeholder="Username" required />
+          <input type="password" name="password" placeholder="Password" required />
+          <input type="hidden" name="login_time" id="login_time">
+          <input type="hidden" name="time_spent" id="time_spent">
           <button type="submit">Login</button>
         </form>
+        <div style="text-align:center; margin-top: 30px;">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeqA1B8Q7EBrf_yc1evjxh2G2jbmNJLPr5hQkWhVfz5yyePgQ/viewform?usp=sharing" target="_blank">
+            <button style="padding: 12px 24px; font-size: 16px; background-color: #4CAF50; color: white; border: none; border-radius: 8px; cursor: pointer;">
+              Give Feedback
+            </button>
+          </a>
+        </div>
       </div>
     </section>
 
-    <!-- About Section -->
     <section id="about" style="display:none">
       <h2>About</h2>
       <p>Process Actives</p>
     </section>
 
-    <!-- Communities Section -->
     <section id="communities" style="display:none">
       <h2>Communities</h2>
       <p>Process For Active.</p>
     </section>
 
-    <!-- Contacts Section -->
     <section id="contacts" style="display:none">
       <h2>Our Team</h2>
       <div class="team">
@@ -254,16 +259,7 @@
       </div>
     </section>
 
-    <!-- Feedback Button -->
-    <div style="text-align:center; margin-top: 30px;">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeqA1B8Q7EBrf_yc1evjxh2G2jbmNJLPr5hQkWhVfz5yyePgQ/viewform?usp=sharing" target="_blank">
-        <button style="padding: 12px 24px; font-size: 16px; background-color: #4CAF50; color: white; border: none; border-radius: 8px; cursor: pointer;">
-          Give Feedback
-        </button>
-      </a>
-    </div>
-
-    <!-- Floating Chatbot Button -->
+    <!-- Floating Chatbot Button and Frame -->
     <button id="chatbot-btn" onclick="toggleChatbot()">💬</button>
     <iframe id="chatbot-frame"
       src="https://cdn.botpress.cloud/webchat/v2.3/shareable.html?configUrl=https://files.bpcontent.cloud/2025/03/31/08/20250331083834-34NDXF4R.json">
@@ -271,44 +267,47 @@
   </div>
 
   <script>
-    // Simulate user credentials for validation
-    const validUsername = 'user';
-    const validPassword = 'password';
-
-    // Show login screen initially
-    window.onload = function() {
-      document.getElementById('loader').style.display = 'none';
-      document.getElementById('main-content').style.display = 'block';
-      showSection('home');
-    }
+    let startTime = new Date();
 
     function showSection(id) {
       const sections = document.querySelectorAll('section');
       sections.forEach(sec => sec.style.display = 'none');
       document.getElementById(id).style.display = 'block';
-    }
 
-    // Validate Login credentials
-    function validateLogin() {
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-
-      if (username === validUsername && password === validPassword) {
-        alert('Login successful! Redirecting...');
-        window.location.href = '#communities';  // Redirect to a specific section after login
-        return false;  // Prevent form submission
-      } else {
-        alert('Invalid credentials! Please try again.');
-        return false;  // Prevent form submission
+      let bg = '';
+      switch(id) {
+        case 'home': bg = 'H-1.jpg'; break;
+        case 'about': bg = 'About.jpg'; break;
+        case 'communities': bg = 'Communities.jpg'; break;
+        case 'contacts': bg = 'C-1.jpeg'; break;
+        default: bg = 'bg-login.jpg';
       }
+      document.body.style.backgroundImage = `url('${bg}')`;
     }
 
-    // Toggle Chatbot visibility
-    function toggleChatbot() {
-      const chatbot = document.getElementById('chatbot-frame');
-      chatbot.style.display = chatbot.style.display === 'block' ? 'none' : 'block';
+    function updateLoginTime() {
+      const loginTime = new Date();
+      document.getElementById('login_time').value = loginTime.toISOString();
+
+      const diffMs = loginTime - startTime;
+      const seconds = Math.floor(diffMs / 1000);
+      document.getElementById('time_spent').value = seconds;
     }
+
+    function toggleChatbot() {
+      const frame = document.getElementById('chatbot-frame');
+      frame.style.display = frame.style.display === 'block' ? 'none' : 'block';
+    }
+
+    // Show loader for 5s then show main content
+    window.onload = () => {
+      setTimeout(() => {
+        document.getElementById('loader').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+        showSection('home');
+        document.body.style.overflow = 'auto'; // Re-enable scrolling
+      }, 3000);
+    };
   </script>
 </body>
 </html>
-

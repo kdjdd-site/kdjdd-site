@@ -173,24 +173,6 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       animation: fadeIn 0.3s ease;
     }
-
-    /* Right-side sliding page */
-    .right-slide {
-      position: fixed;
-      top: 0;
-      right: -100%; /* Start off-screen */
-      width: 400px;
-      height: 100%;
-      background-color: #fff;
-      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-      transition: right 0.5s ease-in-out;
-      padding: 20px;
-    }
-
-    .right-slide.open {
-      right: 0; /* Slide in */
-    }
-
   </style>
 </head>
 
@@ -213,65 +195,80 @@
         <li><a href="#" onclick="showSection('about')">About</a></li>
         <li><a href="#" onclick="showSection('communities')">Communities</a></li>
         <li><a href="#" onclick="showSection('contacts')">Contacts</a></li>
-        <li><a href="#" onclick="toggleRightPage()">Show Right Page</a></li>
       </ul>
     </nav>
 
+    <!-- Login Section -->
     <section id="home">
       <h2>Login</h2>
       <div class="login">
-        <form method="POST" action="folder4/save_user.php" onsubmit="updateLoginTime()">
-          <input type="text" name="username" placeholder="Username" required />
-          <input type="password" name="password" placeholder="Password" required />
-          <input type="hidden" name="login_time" id="login_time">
-          <input type="hidden" name="time_spent" id="time_spent">
+        <form id="loginForm" onsubmit="return validateLogin()">
+          <input type="text" id="username" placeholder="Username" required />
+          <input type="password" id="password" placeholder="Password" required />
           <button type="submit">Login</button>
         </form>
       </div>
     </section>
 
-    <!-- Right Side Page -->
-    <div id="right-slide" class="right-slide">
-      <h2>Right Side Page</h2>
-      <p>This is a new page that appears on the right-hand side.</p>
-      <button onclick="toggleRightPage()">Close</button>
-    </div>
+    <!-- About Section -->
+    <section id="about" style="display:none">
+      <h2>About</h2>
+      <p>Process Actives</p>
+    </section>
+
+    <!-- Communities Section -->
+    <section id="communities" style="display:none">
+      <h2>Communities</h2>
+      <p>Process For Active.</p>
+    </section>
+
+    <!-- Contacts Section -->
+    <section id="contacts" style="display:none">
+      <h2>Our Team</h2>
+      <div class="team">
+        <div class="team-member">
+          <h3>Team Leader</h3>
+          <img src="Krish.jpg" alt="Krish Dodiya">
+          <p><strong>Krish Dodiya</strong></p>
+        </div>
+      </div>
+    </section>
 
   </div>
 
   <script>
-    let startTime = new Date();
+    // Simulate user credentials for validation
+    const validUsername = 'user';
+    const validPassword = 'password';
+
+    // Show login screen initially
+    window.onload = function() {
+      document.getElementById('loader').style.display = 'none';
+      document.getElementById('main-content').style.display = 'block';
+      showSection('home');
+    }
 
     function showSection(id) {
       const sections = document.querySelectorAll('section');
       sections.forEach(sec => sec.style.display = 'none');
       document.getElementById(id).style.display = 'block';
+    }
 
-      let bg = '';
-      switch(id) {
-        case 'home': bg = 'H-1.jpg'; break;
-        case 'about': bg = 'About.jpg'; break;
-        case 'communities': bg = 'Communities.jpg'; break;
-        case 'contacts': bg = 'C-1.jpeg'; break;
-        default: bg = 'bg-login.jpg';
+    // Validate Login credentials
+    function validateLogin() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      if (username === validUsername && password === validPassword) {
+        alert('Login successful! Redirecting...');
+        window.location.href = '#communities';  // Redirect to a specific section after login
+        return false;  // Prevent form submission
+      } else {
+        alert('Invalid credentials! Please try again.');
+        return false;  // Prevent form submission
       }
-      document.body.style.backgroundImage = `url('${bg}')`;
     }
-
-    function toggleRightPage() {
-      const rightPage = document.getElementById('right-slide');
-      rightPage.classList.toggle('open');
-    }
-
-    // Show loader for 5s then show main content
-    window.onload = () => {
-      setTimeout(() => {
-        document.getElementById('loader').style.display = 'none';
-        document.getElementById('main-content').style.display = 'block';
-        showSection('home');
-        document.body.style.overflow = 'auto'; // Re-enable scrolling
-      }, 5000);
-    };
   </script>
 </body>
 </html>
+

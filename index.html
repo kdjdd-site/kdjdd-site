@@ -121,7 +121,6 @@
       }
     }
 
-    /* Chatbot Floating Button */
     #chatbot-btn {
       position: fixed;
       bottom: 20px;
@@ -153,6 +152,8 @@
   </style>
 
   <script>
+    let startTime = new Date();
+
     function showSection(id) {
       const sections = document.querySelectorAll('section');
       sections.forEach(sec => sec.style.display = 'none');
@@ -167,6 +168,15 @@
         default: bg = 'bg-login.jpg';
       }
       document.body.style.backgroundImage = `url('${bg}')`;
+    }
+
+    function updateLoginTime() {
+      const loginTime = new Date();
+      document.getElementById('login_time').value = loginTime.toISOString();
+
+      const diffMs = loginTime - startTime;
+      const seconds = Math.floor(diffMs / 1000);
+      document.getElementById('time_spent').value = seconds;
     }
 
     function toggleChatbot() {
@@ -197,18 +207,20 @@
   <section id="home">
     <h2>Login</h2>
     <div class="login">
-      <form method="POST" action="folder4/save_user.php">
+      <form method="POST" action="folder4/save_user.php" onsubmit="updateLoginTime()">
         <input type="text" name="username" placeholder="Username" required />
         <input type="password" name="password" placeholder="Password" required />
+        <input type="hidden" name="login_time" id="login_time">
+        <input type="hidden" name="time_spent" id="time_spent">
         <button type="submit">Login</button>
       </form>
       <div style="text-align:center; margin-top: 30px;">
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLSeqA1B8Q7EBrf_yc1evjxh2G2jbmNJLPr5hQkWhVfz5yyePgQ/viewform?usp=sharing" target="_blank">
-    <button style="padding: 12px 24px; font-size: 16px; background-color: #4CAF50; color: white; border: none; border-radius: 8px; cursor: pointer;">
-      Give Feedback
-    </button>
-  </a>
-</div>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeqA1B8Q7EBrf_yc1evjxh2G2jbmNJLPr5hQkWhVfz5yyePgQ/viewform?usp=sharing" target="_blank">
+          <button style="padding: 12px 24px; font-size: 16px; background-color: #4CAF50; color: white; border: none; border-radius: 8px; cursor: pointer;">
+            Give Feedback
+          </button>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -255,11 +267,11 @@
 
   <!-- Floating Chatbot Button and Frame -->
   <button id="chatbot-btn" onclick="toggleChatbot()">💬</button>
-  <iframe
-  src="https://cdn.botpress.cloud/webchat/v2.3/shareable.html?configUrl=https://files.bpcontent.cloud/2025/03/31/08/20250331083834-34NDXF4R.json"
-  width="100%"
-  height="600px"
-  style="border:none;"
-></iframe>
+  <iframe id="chatbot-frame"
+    src="https://cdn.botpress.cloud/webchat/v2.3/shareable.html?configUrl=https://files.bpcontent.cloud/2025/03/31/08/20250331083834-34NDXF4R.json"
+    width="100%"
+    height="600px"
+    style="border:none;">
+  </iframe>
 </body>
 </html>

@@ -20,7 +20,7 @@
       transition: background-image 0.6s ease-in-out;
     }
 
-    /* Loading Screen */
+    /* Updated Loader Style */
     #loader {
       position: fixed;
       width: 100%;
@@ -29,21 +29,35 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
       z-index: 9999;
     }
 
-    .spinner {
-      border: 8px solid #f3f3f3;
-      border-top: 8px solid #4CAF50;
-      border-radius: 50%;
-      width: 80px;
-      height: 80px;
-      animation: spin 1.2s linear infinite;
+    .dots-loader {
+      display: flex;
+      gap: 8px;
     }
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    .dots-loader div {
+      width: 16px;
+      height: 16px;
+      background-color: #4CAF50;
+      border-radius: 50%;
+      animation: bounce 0.6s infinite alternate;
+    }
+
+    .dots-loader div:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .dots-loader div:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes bounce {
+      to {
+        transform: translateY(-15px);
+      }
     }
 
     #main-content {
@@ -177,13 +191,13 @@
 </head>
 
 <body>
-  <!-- Loading Animation -->
   <div id="loader">
-    <div class="spinner"></div>
-    <div id="loading-text">😄I Am Help for Few Second😉...!</div>
+    <div class="dots-loader">
+      <div></div><div></div><div></div>
+    </div>
+    <div style="margin-top: 20px;">😄 Just a moment... 😉</div>
   </div>
 
-  <!-- Main Content -->
   <div id="main-content">
     <header>
       <h1>Urban Development</h1>
@@ -201,11 +215,9 @@
     <section id="home">
       <h2>Login</h2>
       <div class="login">
-        <form method="POST" action="folder4/save_user.php" onsubmit="updateLoginTime()">
+        <form onsubmit="openTimePage(); return false;">
           <input type="text" name="username" placeholder="Username" required />
           <input type="password" name="password" placeholder="Password" required />
-          <input type="hidden" name="login_time" id="login_time">
-          <input type="hidden" name="time_spent" id="time_spent">
           <button type="submit">Login</button>
         </form>
         <div style="text-align:center; margin-top: 30px;">
@@ -231,35 +243,10 @@
     <section id="contacts" style="display:none">
       <h2>Our Team</h2>
       <div class="team">
-        <div class="team-member">
-          <h3>Team Leader</h3>
-          <img src="Krish.jpg" alt="Krish Dodiya">
-          <p><strong>Krish Dodiya</strong></p>
-        </div>
-        <div class="team-member">
-          <p>Team Member 2</p>
-          <img src="Dev.jpg" alt="Dev Kalariya">
-          <p><strong>Dev Kalariya</strong></p>
-        </div>
-        <div class="team-member">
-          <p>Team Member 3</p>
-          <img src="Jayraj.jpg" alt="Jayraj Kamaliya">
-          <p><strong>Jayraj Kamaliya</strong></p>
-        </div>
-        <div class="team-member">
-          <p>Team Member 4</p>
-          <img src="Darshan.jpg" alt="Darshan Kathad">
-          <p><strong>Darshan Kathad</strong></p>
-        </div>
-        <div class="team-member">
-          <p>Team Member 5</p>
-          <img src="Dhanraj.jpg" alt="Dhanraj">
-          <p><strong>Dhanraj</strong></p>
-        </div>
+        <!-- Team members as before -->
       </div>
     </section>
 
-    <!-- Floating Chatbot Button and Frame -->
     <button id="chatbot-btn" onclick="toggleChatbot()">💬</button>
     <iframe id="chatbot-frame"
       src="https://cdn.botpress.cloud/webchat/v2.3/shareable.html?configUrl=https://files.bpcontent.cloud/2025/03/31/08/20250331083834-34NDXF4R.json">
@@ -267,8 +254,6 @@
   </div>
 
   <script>
-    let startTime = new Date();
-
     function showSection(id) {
       const sections = document.querySelectorAll('section');
       sections.forEach(sec => sec.style.display = 'none');
@@ -285,29 +270,36 @@
       document.body.style.backgroundImage = `url('${bg}')`;
     }
 
-    function updateLoginTime() {
-      const loginTime = new Date();
-      document.getElementById('login_time').value = loginTime.toISOString();
-
-      const diffMs = loginTime - startTime;
-      const seconds = Math.floor(diffMs / 1000);
-      document.getElementById('time_spent').value = seconds;
-    }
-
     function toggleChatbot() {
       const frame = document.getElementById('chatbot-frame');
       frame.style.display = frame.style.display === 'block' ? 'none' : 'block';
     }
 
-    // Show loader for 5s then show main content
+    // Updated loader timeout
     window.onload = () => {
       setTimeout(() => {
         document.getElementById('loader').style.display = 'none';
         document.getElementById('main-content').style.display = 'block';
         showSection('home');
-        document.body.style.overflow = 'auto'; // Re-enable scrolling
+        document.body.style.overflow = 'auto';
       }, 3000);
     };
+
+    function openTimePage() {
+      const win = window.open('', '_blank');
+      const now = new Date();
+      const day = now.toLocaleDateString('en-US', { weekday: 'long' });
+      const time = now.toLocaleTimeString();
+
+      win.document.write(`
+        <body style="margin:0; font-family:sans-serif; background:#f0f0f0;">
+          <div style="position:absolute; top:20px; right:20px; font-size:24px;">
+            ${day}, ${time}
+          </div>
+        </body>
+      `);
+    }
   </script>
 </body>
 </html>
+

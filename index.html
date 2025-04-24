@@ -173,6 +173,24 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       animation: fadeIn 0.3s ease;
     }
+
+    /* Right-side sliding page */
+    .right-slide {
+      position: fixed;
+      top: 0;
+      right: -100%; /* Start off-screen */
+      width: 400px;
+      height: 100%;
+      background-color: #fff;
+      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+      transition: right 0.5s ease-in-out;
+      padding: 20px;
+    }
+
+    .right-slide.open {
+      right: 0; /* Slide in */
+    }
+
   </style>
 </head>
 
@@ -195,6 +213,7 @@
         <li><a href="#" onclick="showSection('about')">About</a></li>
         <li><a href="#" onclick="showSection('communities')">Communities</a></li>
         <li><a href="#" onclick="showSection('contacts')">Contacts</a></li>
+        <li><a href="#" onclick="toggleRightPage()">Show Right Page</a></li>
       </ul>
     </nav>
 
@@ -208,62 +227,16 @@
           <input type="hidden" name="time_spent" id="time_spent">
           <button type="submit">Login</button>
         </form>
-        <div style="text-align:center; margin-top: 30px;">
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeqA1B8Q7EBrf_yc1evjxh2G2jbmNJLPr5hQkWhVfz5yyePgQ/viewform?usp=sharing" target="_blank">
-            <button style="padding: 12px 24px; font-size: 16px; background-color: #4CAF50; color: white; border: none; border-radius: 8px; cursor: pointer;">
-              Give Feedback
-            </button>
-          </a>
-        </div>
       </div>
     </section>
 
-    <section id="about" style="display:none">
-      <h2>About</h2>
-      <p>Process Actives</p>
-    </section>
+    <!-- Right Side Page -->
+    <div id="right-slide" class="right-slide">
+      <h2>Right Side Page</h2>
+      <p>This is a new page that appears on the right-hand side.</p>
+      <button onclick="toggleRightPage()">Close</button>
+    </div>
 
-    <section id="communities" style="display:none">
-      <h2>Communities</h2>
-      <p>Process For Active.</p>
-    </section>
-
-    <section id="contacts" style="display:none">
-      <h2>Our Team</h2>
-      <div class="team">
-        <div class="team-member">
-          <h3>Team Leader</h3>
-          <img src="Krish.jpg" alt="Krish Dodiya">
-          <p><strong>Krish Dodiya</strong></p>
-        </div>
-        <div class="team-member">
-          <p>Team Member 2</p>
-          <img src="Dev.jpg" alt="Dev Kalariya">
-          <p><strong>Dev Kalariya</strong></p>
-        </div>
-        <div class="team-member">
-          <p>Team Member 3</p>
-          <img src="Jayraj.jpg" alt="Jayraj Kamaliya">
-          <p><strong>Jayraj Kamaliya</strong></p>
-        </div>
-        <div class="team-member">
-          <p>Team Member 4</p>
-          <img src="Darshan.jpg" alt="Darshan Kathad">
-          <p><strong>Darshan Kathad</strong></p>
-        </div>
-        <div class="team-member">
-          <p>Team Member 5</p>
-          <img src="Dhanraj.jpg" alt="Dhanraj">
-          <p><strong>Dhanraj</strong></p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Floating Chatbot Button and Frame -->
-    <button id="chatbot-btn" onclick="toggleChatbot()">💬</button>
-    <iframe id="chatbot-frame"
-      src="https://cdn.botpress.cloud/webchat/v2.3/shareable.html?configUrl=https://files.bpcontent.cloud/2025/03/31/08/20250331083834-34NDXF4R.json">
-    </iframe>
   </div>
 
   <script>
@@ -285,18 +258,9 @@
       document.body.style.backgroundImage = `url('${bg}')`;
     }
 
-    function updateLoginTime() {
-      const loginTime = new Date();
-      document.getElementById('login_time').value = loginTime.toISOString();
-
-      const diffMs = loginTime - startTime;
-      const seconds = Math.floor(diffMs / 1000);
-      document.getElementById('time_spent').value = seconds;
-    }
-
-    function toggleChatbot() {
-      const frame = document.getElementById('chatbot-frame');
-      frame.style.display = frame.style.display === 'block' ? 'none' : 'block';
+    function toggleRightPage() {
+      const rightPage = document.getElementById('right-slide');
+      rightPage.classList.toggle('open');
     }
 
     // Show loader for 5s then show main content

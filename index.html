@@ -209,7 +209,7 @@
 
     <section id="about" style="display:none">
       <h2>About</h2>
-      <p>This is your Urban Development platform description...</p>
+       <p>Welcome to KDJDD Project, a platform dedicated to reimagining cities for the future. Our goal is to connect citizens, planners, and developers in one space where ideas turn into action. We focus on smart urban growth, using data-driven tools, community feedback, and innovative planning models to make neighborhoods more livable, sustainable, and inclusive. Whether you're a local resident curious about upcoming projects or a professional shaping tomorrow's infrastructure, UrbanVibe is your space to engage, learn, and contribute. With features like real-time development maps, interactive planning boards, and public idea submissions, we aim to transform urban development into a collaborative experience.</p>
     </section>
 
     <section id="form" style="display:none">
@@ -284,7 +284,7 @@
       </div>
     </section>
 
-    <button id="chatbot-btn" onclick="toggleChatbot()">💬</button>
+    <button id="chatbot-btn" onclick="toggleChatbot()">💬Helpingtool</button>
     <iframe id="chatbot-frame" src="https://cdn.botpress.cloud/webchat/v2.4/shareable.html?configUrl=https://files.bpcontent.cloud/2025/03/31/08/20250331083834-34NDXF4R.json"></iframe>
   </div>
 
@@ -325,6 +325,53 @@
       e.preventDefault();
       alert('Form successfully submitted!');
     });
+  </script>
+  <script>
+    function showSection(id) {
+      const sections = document.querySelectorAll('section');
+      sections.forEach(sec => sec.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+
+      let bg = '';
+      switch(id) {
+        case 'home': bg = 'H-1.jpg'; break;
+        case 'about': bg = 'About.jpg'; break;
+        case 'Muncipal Form': bg = 'Communities.jpg'; break;
+        case 'contacts': bg = 'C-1.jpeg'; break;
+        default: bg = 'bg-login.jpg';
+      }
+      document.body.style.backgroundImage = `url('${bg}')`;
+    }
+
+    function toggleChatbot() {
+      const frame = document.getElementById('chatbot-frame');
+      frame.style.display = frame.style.display === 'block' ? 'none' : 'block';
+    }
+
+    // Updated loader timeout
+    window.onload = () => {
+      setTimeout(() => {
+        document.getElementById('loader').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+        showSection('home');
+        document.body.style.overflow = 'auto';
+      }, 3000);
+    };
+
+    function openTimePage() {
+      const win = window.open('', '_blank');
+      const now = new Date();
+      const day = now.toLocaleDateString('en-US', { weekday: 'long' });
+      const time = now.toLocaleTimeString();
+
+      win.document.write(`
+        <body style="margin:0; font-family:sans-serif; background:#f0f0f0;">
+          <div style="position:absolute; top:20px; right:20px; font-size:24px;">
+            ${day}, ${time}
+          </div>
+        </body>
+      `);
+    }
   </script>
 </body>
 </html>

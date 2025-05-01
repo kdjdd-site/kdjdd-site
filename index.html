@@ -10,17 +10,16 @@
       margin: 0;
       padding: 0;
       overflow: hidden;
+      font-family: Arial, sans-serif;
     }
 
     body {
-      font-family: Arial, sans-serif;
       background: url('bg-login.jpg') no-repeat center center fixed;
       background-size: cover;
       background-position: center;
       transition: background-image 0.6s ease-in-out;
     }
 
-    /* Updated Loader Style */
     #loader {
       position: fixed;
       width: 100%;
@@ -46,38 +45,31 @@
       animation: bounce 0.2s infinite alternate;
     }
 
-    .dots-loader div:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    .dots-loader div:nth-child(3) {
-      animation-delay: 0.2s;
-    }
+    .dots-loader div:nth-child(2) { animation-delay: 0.2s; }
+    .dots-loader div:nth-child(3) { animation-delay: 0.4s; }
 
     @keyframes bounce {
-      to {
-        transform: translateY(-15px);
-      }
+      to { transform: translateY(-15px); }
     }
 
-    #main-content {
-      display: none;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    header {
-      background-color: rgba(76, 175, 80, 0.9);
-      color: white;
-      padding: 1em;
-      text-align: center;
+    #main-content { display: none; }
+
+    header, nav ul, section {
+      animation: fadeIn 0.6s ease-in-out;
     }
 
     nav ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      background-color: rgba(51, 51, 51, 0.9);
+      list-style: none;
       display: flex;
       justify-content: center;
+      background-color: rgba(51, 51, 51, 0.9);
+      padding: 0;
+      margin: 0;
     }
 
     nav ul li a {
@@ -93,70 +85,65 @@
 
     section {
       padding: 20px;
-      background-color: rgba(255, 255, 255, 0.85);
+      background-color: rgba(255, 255, 255, 0.9);
       margin: 10px;
       border-radius: 10px;
       min-height: calc(100vh - 140px);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      animation: fadeIn 0.6s ease-in-out;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .login form {
-      background: rgba(255, 255, 255, 0.95);
+    .login form, .form-container {
+      background: white;
       padding: 20px;
-      border-radius: 15px;
-      max-width: 350px;
+      border-radius: 10px;
+      max-width: 500px;
       margin: auto;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       text-align: center;
     }
 
-    .login input, .login button {
+    input, select, textarea, button {
       width: 90%;
-      margin: 10px 0;
       padding: 10px;
-      border-radius: 8px;
-      font-size: 16px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
     }
 
-    .login button {
-      background-color: #4CAF50;
-      border: none;
+    button {
+      background-color: #00796b;
       color: white;
+      border: none;
       cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #004d40;
+    }
+
+    .form-step {
+      display: none;
+    }
+
+    .form-step.active {
+      display: block;
     }
 
     .team {
       display: flex;
-      justify-content: space-around;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 20px;
-    }
-
-    .team img {
-      width: 180px;
-      height: auto;
-      border-radius: 10px;
     }
 
     .team-member {
       text-align: center;
-      flex: 0 1 calc(25% - 20px);
+      flex: 0 1 200px;
     }
 
-    @media (max-width: 768px) {
-      .team {
-        flex-direction: column;
-        align-items: center;
-      }
-      .team-member {
-        flex: 0 1 auto;
-      }
+    .team-member img {
+      width: 180px;
+      height: auto;
+      border-radius: 10px;
     }
 
     #chatbot-btn {
@@ -185,11 +172,9 @@
       z-index: 1000;
       border-radius: 15px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      animation: fadeIn 0.1s ease;
     }
   </style>
 </head>
-
 <body>
   <div id="loader">
     <div class="dots-loader">
@@ -202,12 +187,11 @@
     <header>
       <h1>Urban Development</h1>
     </header>
-
     <nav>
       <ul>
         <li><a href="#" onclick="showSection('home')">Login</a></li>
         <li><a href="#" onclick="showSection('about')">About</a></li>
-        <li><a href="#" onclick="showSection('communities')">Communities</a></li>
+        <li><a href="#" onclick="showSection('form')">Municipal Form</a></li>
         <li><a href="#" onclick="showSection('contacts')">Contacts</a></li>
       </ul>
     </nav>
@@ -215,37 +199,58 @@
     <section id="home">
       <h2>Login</h2>
       <div class="login">
-        <form onsubmit="openTimePage(); return false;">
-          <input type="text" name="username" placeholder="Username" required />
-          <input type="password" name="password" placeholder="Password" required />
+        <form onsubmit="showSection('form'); return false;">
+          <input type="text" placeholder="Username" required />
+          <input type="password" placeholder="Password" required />
           <button type="submit">Login</button>
         </form>
-        <div style="text-align:center; margin-top: 30px;">
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeqA1B8Q7EBrf_yc1evjxh2G2jbmNJLPr5hQkWhVfz5yyePgQ/viewform?usp=sharing" target="_blank">
-            <button style="padding: 12px 24px; font-size: 16px; background-color: #4CAF50; color: white; border: none; border-radius: 8px; cursor: pointer;">
-              Give Feedback
-            </button>
-          </a>
-        </div>
       </div>
     </section>
 
     <section id="about" style="display:none">
       <h2>About</h2>
-      <p>Welcome to KDJDD Project, a platform dedicated to reimagining cities for the future. Our goal is to connect citizens, planners, and developers in one space where ideas turn into action. We focus on smart urban growth, using data-driven tools, community feedback, and innovative planning models to make neighborhoods more livable, sustainable, and inclusive. Whether you're a local resident curious about upcoming projects or a professional shaping tomorrow's infrastructure, UrbanVibe is your space to engage, learn, and contribute. With features like real-time development maps, interactive planning boards, and public idea submissions, we aim to transform urban development into a collaborative experience.</p>
+      <p>This is your Urban Development platform description...</p>
     </section>
 
-    <section id="communities" style="display:none">
-      <h2>Communities</h2>
-      <p>At KDJDD Project, we believe that real change begins at the local level. Our Communities section is where ideas meet action. We connect diverse voices—from lifelong residents to first-time city explorers—into one powerful network. Through interactive discussion boards, community-led events, and project collaboration spaces, UrbanVibe encourages everyone to participate in co-creating urban solutions.
+    <section id="form" style="display:none">
+      <div class="form-container">
+        <form id="multiStepForm">
+          <div class="form-step active" id="step1">
+            <h2>Gujarat Municipal Corporation</h2>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+            <label for="mobile">Mobile Number</label>
+            <input type="tel" id="mobile" name="mobile" pattern="\d{10}" required placeholder="10 digit number">
+            <label for="city">City</label>
+            <select id="city" name="city" required>
+              <option value="">-- Select City --</option>
+              <option>Ahmedabad</option><option>Surat</option><option>Gandhinagar</option>
+              <option>Vadodara</option><option>Anand</option><option>Nadiyad</option>
+              <option>Bharuch</option><option>Ankleshwar</option><option>Valsad</option>
+              <option>Bhavnagar</option><option>Surendranagar</option><option>Junagadh</option>
+            </select>
+            <label for="address">Address</label>
+            <textarea id="address" name="address" rows="2" required></textarea>
+            <label for="pincode">Area Pincode</label>
+            <input type="text" id="pincode" name="pincode" pattern="\d{6}" required placeholder="6 digit number">
+            <button type="button" onclick="nextStep(2)">Next</button>
+          </div>
 
-Whether you're passionate about sustainable transport, affordable housing, green spaces, or cultural heritage, there's a space for you here. Users can create or join neighborhood groups, share updates on local initiatives, and vote on community-driven proposals. Our goal is to amplify your voice, build strong neighborhood connections, and turn shared ideas into visible results.
+          <div class="form-step" id="step2">
+            <h2>Confirm Mobile Number</h2>
+            <label for="confirmNumber">Re-enter Mobile Number</label>
+            <input type="tel" id="confirmNumber" name="confirmNumber" pattern="\d{10}" required>
+            <button type="button" onclick="nextStep(3)">Generate OTP</button>
+          </div>
 
-We also feature community spotlight stories, celebrating individuals and groups who are making a difference in their city. These stories not only inspire others but also highlight the collective impact of civic engagement.
-
-By working together, we’re building cities that reflect the needs and dreams of the people who live in them. Because at the heart of every great city... is a strong, active community.
-
-</p>
+          <div class="form-step" id="step3">
+            <h2>Enter OTP</h2>
+            <label for="otp">OTP</label>
+            <input type="text" id="otp" name="otp" required>
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
     </section>
 
     <section id="contacts" style="display:none">
@@ -279,28 +284,14 @@ By working together, we’re building cities that reflect the needs and dreams o
       </div>
     </section>
 
-
     <button id="chatbot-btn" onclick="toggleChatbot()">💬</button>
-    <iframe id="chatbot-frame"
-      src="https://cdn.botpress.cloud/webchat/v2.4/shareable.html?configUrl=https://files.bpcontent.cloud/2025/03/31/08/20250331083834-34NDXF4R.json">
-    </iframe>
+    <iframe id="chatbot-frame" src="https://cdn.botpress.cloud/webchat/v2.4/shareable.html?configUrl=https://files.bpcontent.cloud/2025/03/31/08/20250331083834-34NDXF4R.json"></iframe>
   </div>
 
   <script>
     function showSection(id) {
-      const sections = document.querySelectorAll('section');
-      sections.forEach(sec => sec.style.display = 'none');
+      document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
       document.getElementById(id).style.display = 'block';
-
-      let bg = '';
-      switch(id) {
-        case 'home': bg = 'H-1.jpg'; break;
-        case 'about': bg = 'About.jpg'; break;
-        case 'communities': bg = 'Communities.jpg'; break;
-        case 'contacts': bg = 'C-1.jpeg'; break;
-        default: bg = 'bg-login.jpg';
-      }
-      document.body.style.backgroundImage = `url('${bg}')`;
     }
 
     function toggleChatbot() {
@@ -308,7 +299,6 @@ By working together, we’re building cities that reflect the needs and dreams o
       frame.style.display = frame.style.display === 'block' ? 'none' : 'block';
     }
 
-    // Updated loader timeout
     window.onload = () => {
       setTimeout(() => {
         document.getElementById('loader').style.display = 'none';
@@ -318,20 +308,23 @@ By working together, we’re building cities that reflect the needs and dreams o
       }, 3000);
     };
 
-    function openTimePage() {
-      const win = window.open('', '_blank');
-      const now = new Date();
-      const day = now.toLocaleDateString('en-US', { weekday: 'long' });
-      const time = now.toLocaleTimeString();
-
-      win.document.write(`
-        <body style="margin:0; font-family:sans-serif; background:#f0f0f0;">
-          <div style="position:absolute; top:20px; right:20px; font-size:24px;">
-            ${day}, ${time}
-          </div>
-        </body>
-      `);
+    function nextStep(step) {
+      const currentStep = document.querySelector('.form-step.active');
+      const inputs = currentStep.querySelectorAll('input, select, textarea');
+      for (let input of inputs) {
+        if (!input.checkValidity()) {
+          input.reportValidity();
+          return;
+        }
+      }
+      currentStep.classList.remove('active');
+      document.getElementById('step' + step).classList.add('active');
     }
+
+    document.getElementById('multiStepForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Form successfully submitted!');
+    });
   </script>
 </body>
 </html>
